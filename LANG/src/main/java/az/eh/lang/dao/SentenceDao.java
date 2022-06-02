@@ -1,7 +1,6 @@
 package az.eh.lang.dao;
 
 import az.eh.lang.daoImp.SentenceImpl;
-import az.eh.lang.dto.DictionaryDto;
 import az.eh.lang.dto.SentenceDto;
 
 public class SentenceDao implements SentenceImpl{

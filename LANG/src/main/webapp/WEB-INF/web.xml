@@ -9,4 +9,15 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>LANG_Servlet</servlet-name>
+  	<servlet-class>az.eh.lang.servlet.LangServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LANG_Servlet</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>  
+ 
 </web-app>
