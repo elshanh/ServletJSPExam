@@ -1,66 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>LANG Dictionary</title>
-		
-	<style>
-	table {
-	  font-family: arial, sans-serif;
-	  border-collapse: collapse;
-	  width: 100%;
-	}
-	
-	td, th {
-	  border: 1px solid #dddddd;
-	  text-align: left;
-	  padding: 8px;
-	}
-	
-	tr:nth-child(even) {
-	  background-color: #dddddd;
-	}
-	</style>
-	</head>
+<head>
+<title>LANG Dictionary</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
 
-	<body>
-	
-	<h2>Dictionary Page</h2>
-	
-	<form action="dictionary" method="post">
-		<table>
-			<tr>
-				<th>No</th>
-				<th>Word-Eng</th>
-				<th>Speak-Eng</th>
-				<th>Word-Ger</th>
-				<th>Speak-Ger</th>
-				<th>Word-Rus</th>
-				<th>Speak-Rus</th>
-				<th>Translate Az</th>
-				<th>Translate Tr</th>
-			</tr>
-			<tr>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
-				<td>6</td>
-				<td>7</td>
-				<td>8</td>
-				<td>9</td>
-			</tr>
-		</table>
-		
-		<br>
-		
-		<button type="submit">Insert</button>
-		<button type="submit">Update</button>
-		<button type="submit">Delete</button>
-		<button type="submit">Select</button>
-	</form>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+			<div>
+				<a href="" class="navbar-brand">LANG</a>
+			</div>
+		</nav>
+	</header>
+	<br>
 
-	</body>
+	<div class="row">
+
+		<div class="container">
+			<h3 class="text-center">İngiliscə, Almanca və Rusca Lüğət</h3>
+			<hr>
+			<div class="container text-left">
+				<a href="<%=request.getContextPath()%>/newWord" class="btn btn-success">Yeni söz</a>
+				<a href="<%=request.getContextPath()%>/" class="btn btn-danger">Menu</a>
+			</div>
+			<br>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="display:none">ID</th>
+						<th>Word-Eng</th>
+						<th>Speak-Eng</th>
+						<th>Word-Ger</th>
+						<th>Speak-Ger</th>
+						<th>Word-Rus</th>
+						<th>Speak-Rus</th>
+						<th>Translate Az</th>
+						<th>Translate Tr</th>
+						<th>ƏMƏLİYYAT</th>						
+					</tr>
+				</thead>
+				<tbody>
+					<!--   for Hissesi  -->
+					<c:forEach var="dic" items="${listDictionary}">
+							<tr>
+								<td style="display:none"><c:out value="${dic.id}" /></td>
+								<td><c:out value="${dic.wordEng}" /></td>
+								<td><c:out value="${dic.speaksEng}" /></td>
+								<td><c:out value="${dic.wordGer}" /></td>
+								<td><c:out value="${dic.speaksGer}" /></td>
+								<td><c:out value="${dic.wordRus}" /></td>
+								<td><c:out value="${dic.speaksRus}" /></td>
+								<td><c:out value="${dic.translateAz}" /></td>
+								<td><c:out value="${dic.translateTr}" /></td>
+								
+								
+								<td><a href="edit?id=<c:out value='${dic.id}' />" class="btn btn-warning">DÜZƏLİŞ</a>
+									&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete?id=<c:out value='${dic.id}' />" class="btn btn-danger">SİL</a>
+								</td>
+							</tr>
+					</c:forEach>
+				</tbody>
+
+			</table>
+		</div>
+	</div>
+</body>
 </html>

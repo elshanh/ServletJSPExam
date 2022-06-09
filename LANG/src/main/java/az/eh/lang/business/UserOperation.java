@@ -6,6 +6,26 @@ import az.eh.lang.webdto.UserWebDto;
 
 public class UserOperation {
 	
+	public static int loginControl(String usr, String psw) {
+	    int result = 0;
+		
+		UserDto userDto = new UserDto();
+	    userDto.setUsername(usr);
+	    userDto.setPassword(psw);
+	    
+	    UserDao userDao = new UserDao();
+	    userDto = userDao.select(userDto,"login");
+	    
+	    if (userDto.getState().equals("A")) {
+	    	if (userDto.getStatus().equals("Admin")) {
+	    		result = 1;
+	    	}else {
+	    		result = 2;
+	    	}
+	    }
+		return result;
+	}		
+	
 	public static void insert(UserWebDto userWebDto) {
 		convertWebToBack(userWebDto);		
 	}

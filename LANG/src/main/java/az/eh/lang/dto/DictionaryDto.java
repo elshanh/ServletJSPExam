@@ -15,6 +15,24 @@ public class DictionaryDto {
 	public DictionaryDto() {
 	}
 	
+	 
+	
+	public DictionaryDto(int id, String wordEng, String speaksEng, String wordGer, String speaksGer, String wordRus,
+			String speaksRus, String translateAz, String translateTr) {
+		super();
+		this.id = id;
+		this.wordEng = wordEng;
+		this.speaksEng = speaksEng;
+		this.wordGer = wordGer;
+		this.speaksGer = speaksGer;
+		this.wordRus = wordRus;
+		this.speaksRus = speaksRus;
+		this.translateAz = translateAz;
+		this.translateTr = translateTr;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}

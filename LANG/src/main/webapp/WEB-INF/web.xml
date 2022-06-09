@@ -17,7 +17,7 @@
   
   <servlet-mapping>
   	<servlet-name>LANG_Servlet</servlet-name>
-  	<url-pattern>/</url-pattern>
+  	<url-pattern>/langServlet</url-pattern>
   </servlet-mapping>  
  
 </web-app>
