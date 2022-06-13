@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
+
 import az.eh.lang.business.DictionaryOperation;
 import az.eh.lang.business.UserOperation;
 import az.eh.lang.dto.DictionaryDto;
@@ -33,13 +35,6 @@ public class LangServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String inRequest = request.getServletPath();
-		
-        String user = request.getParameter("pUsr");
-        String pass = request.getParameter("pPsw");
-		
-        
-        System.out.println(user);
-        System.out.println(pass);
         
         try {
         	switch (inRequest) {
@@ -51,6 +46,9 @@ public class LangServlet extends HttpServlet {
 			break;
 			case "/dictionary":
 				dictionatyList(request,response);
+			break;
+			case "/menu":
+				menu(request,response);
 			break;
 			case "/newWord":
 				newWord(request,response);
@@ -78,16 +76,34 @@ public class LangServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	private void loginControl(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
-	    int control = UserOperation.loginControl(request.getParameter("pUsr"), request.getParameter("pPsw"));
-	    
+		int control = 0;
+		try {
+	    	control = UserOperation.loginControl(request.getParameter("pUsr"), request.getParameter("pPsw"));	
+		} catch (Exception e) {
+			control = 0;
+		}
+		
+
+	    if (control == 0) {
+            request.setAttribute("errorMessage", "Invalid username or password"); 
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+            dispatcher.forward( request, response);
+	    }	    
 	    if (control == 1) {
 	    	menu(request,response);
+	    }
+	    if (control == 2) {
+	    	menuUser(request,response);
 	    }
 	}	
 	private void menu(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
 		dispatcher.forward(request, response);
 	}
+	private void menuUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("menuUser.jsp");
+		dispatcher.forward(request, response);
+	}	
 	private void userList(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("user.jsp");
 		dispatcher.forward(request, response);

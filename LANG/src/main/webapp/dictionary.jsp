@@ -26,7 +26,7 @@
 			<hr>
 			<div class="container text-left">
 				<a href="<%=request.getContextPath()%>/newWord" class="btn btn-success">Yeni söz</a>
-				<a href="<%=request.getContextPath()%>/" class="btn btn-danger">Menu</a>
+				<a href="<%=request.getContextPath()%>/menu" class="btn btn-danger">Menu</a>
 			</div>
 			<br>
 			<table class="table table-bordered">

@@ -14,10 +14,10 @@ public class UserOperation {
 	    userDto.setPassword(psw);
 	    
 	    UserDao userDao = new UserDao();
-	    userDto = userDao.select(userDto,"login");
+	    userDto = userDao.select(userDto,"login"); 
 	    
 	    if (userDto.getState().equals("A")) {
-	    	if (userDto.getStatus().equals("Admin")) {
+	    	if (userDto.getStatus().equals("admin")) {
 	    		result = 1;
 	    	}else {
 	    		result = 2;
