@@ -10,8 +10,19 @@ public class UserDto {
 	private String state;
 	private String status;	
 	
-	public UserDto() {
+	public UserDto() {		
 	}
+	
+	public UserDto(int id, String name, String surname, String username, String password, String state,String status) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+		this.password = password;
+		this.state = state;
+		this.status = status;
+	}	
 
 	public int getId() {
 		return id;

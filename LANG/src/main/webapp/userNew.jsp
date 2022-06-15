@@ -22,11 +22,10 @@
 	<div class="container col-md-5">
 		<div class="card">
 			<div class="card-body">
-			<form action="newUserInsert" method="post">
-
+			<form action="userInsert" method="post">
 				<caption>
 					<h2>
-            			Yeni Istifadeci
+            			Add New User
 					</h2>
 				</caption>
 				
@@ -42,7 +41,7 @@
 				</fieldset>
 				<!-- BITDI -->
 
-				<button type="submit" class="btn btn-success">QƏBUL</button>
+				<button type="submit" class="btn btn-success">Enter</button>
 				</form>
 			</div>
 		</div>

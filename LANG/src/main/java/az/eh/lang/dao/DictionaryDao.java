@@ -18,7 +18,6 @@ public class DictionaryDao implements DictionaryImpl{
 	protected Connection getConnection() {
 		Connection connection = null;
 		try {
-			//Class.forName("com.mysql.jdbc.Driver");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = DriverManager.getConnection("jdbc:mysql://192.168.0.113:3306/LANG?useSSL=false","root","bM3YSse2P1Da746eMuRnaQsJ6qs3idQR");
 		} catch (SQLException e) {
@@ -49,20 +48,49 @@ public class DictionaryDao implements DictionaryImpl{
 			
 		} catch (SQLException e) {
 			e.getMessage();
-		}	
-		
+		}
 	}
 
 	@Override
 	public void update(DictionaryDto dictionaryDto) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(DictionaryQuery.updateNewWord);
+		try (Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(DictionaryQuery.updateNewWord)) {
+			
+			preparedStatement.setString(1, dictionaryDto.getWordEng());
+			preparedStatement.setString(2, dictionaryDto.getSpeaksEng());
+			preparedStatement.setString(3, dictionaryDto.getWordGer());
+			preparedStatement.setString(4, dictionaryDto.getSpeaksGer());
+			preparedStatement.setString(5, dictionaryDto.getWordRus());
+			preparedStatement.setString(6, dictionaryDto.getSpeaksRus());
+			preparedStatement.setString(7, dictionaryDto.getTranslateAz());
+			preparedStatement.setString(8, dictionaryDto.getTranslateTr());
+			preparedStatement.setInt(9, dictionaryDto.getId());
+			
+			System.out.println(preparedStatement);
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.getMessage();
+		}
 	}
 
 	@Override
 	public void delete(DictionaryDto dictionaryDto) {
-		// TODO Auto-generated method stub
 		
+		System.out.println(DictionaryQuery.deleteWord);
+		
+		try (Connection connection = getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(DictionaryQuery.deleteWord)) {
+			
+			preparedStatement.setInt(1, dictionaryDto.getId());
+			
+			System.out.println(preparedStatement);
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.getMessage();
+		}
 	}
 	@Override
 	public DictionaryDto select(DictionaryDto dictionaryDto,String type) {
@@ -76,8 +104,8 @@ public class DictionaryDao implements DictionaryImpl{
 			try (
 				Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.0.113:3306/LANG?useSSL=false","root","bM3YSse2P1Da746eMuRnaQsJ6qs3idQR");
 				PreparedStatement preparedStatement = connection.prepareStatement(DictionaryQuery.gelAllWord)){
-	            
-	            System.out.println(preparedStatement);
+				
+				System.out.println(preparedStatement);
 	            
 	            ResultSet resultSet = preparedStatement.executeQuery();
 	            while (resultSet.next()) {
@@ -96,6 +124,34 @@ public class DictionaryDao implements DictionaryImpl{
 				// TODO: handle exception
 			}
 		}
+		if (type.toString().equals("id")) {
+			try (
+				Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.0.113:3306/LANG?useSSL=false","root","bM3YSse2P1Da746eMuRnaQsJ6qs3idQR");
+				PreparedStatement preparedStatement = connection.prepareStatement(DictionaryQuery.gelWordById)){
+	            
+				System.out.println(preparedStatement);
+	            
+				preparedStatement.setInt(1, dictionaryDto.getId());
+				
+	            System.out.println(preparedStatement);
+	            
+	            ResultSet resultSet = preparedStatement.executeQuery();
+	            while (resultSet.next()) {
+	            	dictionaryDto.setId(resultSet.getInt(1));
+	            	dictionaryDto.setWordEng(resultSet.getString(2));
+	            	dictionaryDto.setSpeaksEng(resultSet.getString(3));
+	            	dictionaryDto.setWordGer(resultSet.getString(4));
+	            	dictionaryDto.setSpeaksGer(resultSet.getString(5));
+	            	dictionaryDto.setWordRus(resultSet.getString(6));
+	            	dictionaryDto.setSpeaksRus(resultSet.getString(7));
+	            	dictionaryDto.setTranslateAz(resultSet.getString(8));
+	            	dictionaryDto.setTranslateTr(resultSet.getString(9));
+				}
+	            
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}		
 		
 		return dictionaryDto;
 	}

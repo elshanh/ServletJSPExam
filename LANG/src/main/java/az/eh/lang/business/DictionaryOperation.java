@@ -17,13 +17,34 @@ public class DictionaryOperation {
 		return dictionaryDto;
 	}
 	public static List<DictionaryDto> getAllWordList() {
-		DictionaryDto dictionaryDto = new DictionaryDto();
-		DictionaryDao dictionaryDao = new DictionaryDao();
-		
 		List<DictionaryDto> dictionaryDtos = new ArrayList<>();
-		dictionaryDtos = dictionaryDao.selectList(dictionaryDto,"all");
-		return dictionaryDtos;
+		DictionaryDto dictionaryDto = new DictionaryDto();
+		DictionaryDao dictionaryDao = new DictionaryDao(); 
+		return dictionaryDao.selectList(dictionaryDto,"all");
 	}
+	public static DictionaryDto getWordById(int id) {
+		
+		DictionaryDto dictionaryDto = new DictionaryDto();
+		dictionaryDto.setId(id);
+		
+		DictionaryDao dictionaryDao = new DictionaryDao();
+		dictionaryDto = dictionaryDao.select(dictionaryDto,"id");
+		
+		return dictionaryDto;
+	}	
+	
+	public static void delete(int id) {
+		DictionaryDto dictionaryDto = new DictionaryDto();
+		dictionaryDto.setId(id);
+		
+		DictionaryDao dictionaryDao = new DictionaryDao();
+		dictionaryDao.delete(dictionaryDto);
+	}
+	
+	public static void update(DictionaryDto dictionaryDto) {
+		DictionaryDao dictionaryDao = new DictionaryDao();
+		dictionaryDao.update(dictionaryDto);		
+	}	
 	
 	public static void insert(DictionaryWebDto dictionaryWebDto) {
 		convertWebToBack(dictionaryWebDto);		

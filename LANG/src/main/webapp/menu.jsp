@@ -1,35 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>LANG Menu</title>
-<style>
-.button {
-background-color: white;
-border: 2px solid #4CAF50; /* Green */
-color: black;
-padding: 15px 32px;
-text-align: center;
-text-decoration: none;
-display: inline-block;
-font-size: 16px;
-}
+<head>
+<title>LANG Menu</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
 
-</style>
-	</head>
+	<header>
+		<nav class="navbar navbar-expand-md navbar-dark" style="background-color: tomato">
+			<div>
+				<a href="" class="navbar-brand">LANG</a>
+			</div>
+		</nav>
+	</header>
+	<br>
 
-	<body>
-	
-	<h2>Menu</h2>
-	
-	<div class="centered">
-	<a href="<%=request.getContextPath()%>/user"><button class="button" type="submit">User</button></a>
-	<a href="<%=request.getContextPath()%>/dictionary"><button class="button" type="submit">Dictionary</button></a>
-	<a href="<%=request.getContextPath()%>/sentence" class="nav-link"><button class="button" type="submit">Sentence</button></a>
-	<a href="<%=request.getContextPath()%>/note" class="nav-link"><button class="button" type="submit">Note</button></a>
+	<div class="row">
+
+		<div class="container">
+			<h3 class="text-center">Menu</h3>
+			<hr>
+			<div class="container text-left">
+				<a href="<%=request.getContextPath()%>/userList" class="btn btn-success">User</a>
+				<a href="<%=request.getContextPath()%>/dictionaryList" class="btn btn-success">Dictionary</a>
+				<a href="<%=request.getContextPath()%>/sentenceList" class="btn btn-success">Sentence</a>
+				<a href="<%=request.getContextPath()%>/noteList" class="btn btn-success">Note</a>
+			</div>
+		</div>
 	</div>
-	
-	</body>
+</body>
 </html>
